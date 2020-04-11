@@ -556,7 +556,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ec0958db8b6aa4a80b9b259f981518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grounded: 0
+  isGrabbed: 0
+  ball: {fileID: 40919614}
+  ballPosition: {fileID: 40919620}
+  xRRig: {fileID: 836624084}
+  rigPosition: {fileID: 836624086}
+  ground: {fileID: 259715464}
 --- !u!1001 &54165231
 PrefabInstance:
   m_ObjectHideFlags: 0

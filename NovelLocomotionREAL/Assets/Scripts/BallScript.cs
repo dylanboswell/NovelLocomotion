@@ -6,13 +6,19 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class BallScript : MonoBehaviour
 {
-    public bool grounded;
+    public bool isGrabbed;
+    public GameObject ball;
+    public Transform ballPosition;
+    public GameObject xRRig;
+    public Transform rigPosition;
+
+    public Rigidbody ground;
     // Start is called before the first frame update
     void Start()
     {
-        grounded = true;
+        isGrabbed = false;
         
-        Rigidbody ground;
+       
     }
 
     // Update is called once per frame
@@ -23,10 +29,23 @@ public class BallScript : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        //if(collision.rigidbody == ground)
+        if (isGrabbed == true)
         {
-
+            if (collision.rigidbody == ground)
+            {
+                rigPosition = ballPosition;
+                isGrabbed = false;
+            }
+            else
+            {
+                return;
+            }
         }
+        else
+        {
+            return;
+        }
+
     }
 
 
