@@ -7,21 +7,23 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class BallScript : MonoBehaviour
 {
     public bool isGrabbed;
+    public bool inAir;
     public GameObject ball;
     public Transform ballPosition;
     public Rigidbody ballRigidbody;
     public GameObject xRRig;
     public Transform rigPosition;
-    public Transform rigCamera;
+    
     public Material working;
     public Material landed;
-    public Collision ground;
+    public Collider ground;
     public Material groundColor;
     public Material broken;
     // Start is called before the first frame update
     void Start()
     {
         isGrabbed = false;
+        inAir = true;
         
        
     }
@@ -41,13 +43,15 @@ public class BallScript : MonoBehaviour
     }
     public void OnRelease()
     {
+        isGrabbed = false;
+        inAir = true;
        // ballRigidbody.isKinematic = false;
        // ballRigidbody.useGravity = true;
     }
 
-    public void OnCollisionEnter(Collision other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (isGrabbed == true)
+        if (inAir == true)
         {
             Debug.Log("grabbed");
             ball.GetComponent<MeshRenderer>().material = landed;
@@ -55,14 +59,23 @@ public class BallScript : MonoBehaviour
             {
                 ball.GetComponent<MeshRenderer>().material = groundColor;
                 rigPosition.position = ballPosition.position;
-                rigCamera = ballPosition;
-                isGrabbed = false;
+                
+                inAir = false;
                 Debug.Log("moved");
 
+            }
+            else if(other.tag == "Floor")
+            {
+                ball.GetComponent<MeshRenderer>().material = groundColor;
+                rigPosition.position = ballPosition.position;
+
+                inAir = false;
+                Debug.Log("moved");
             }
             else
             {
                 ball.GetComponent<MeshRenderer>().material = broken;
+                inAir = false;
                 return;
             }
         }
