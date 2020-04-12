@@ -75,7 +75,7 @@ public class BallScript : MonoBehaviour
             else
             {
                 ball.GetComponent<MeshRenderer>().material = broken;
-                inAir = false;
+                //inAir = false;
                 return;
             }
         }
