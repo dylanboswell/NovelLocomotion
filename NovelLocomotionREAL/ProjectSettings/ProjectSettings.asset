@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: NovelLocomotionREAL
+  companyName: DylanBoswell
+  productName: NovelLocomotionWorking
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -119,7 +119,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1
+  bundleVersion: 1.0
   preloadedAssets:
   - {fileID: 8969592209535162621, guid: 1c7d5e7823635eb439e306ccdf87bd3d, type: 2}
   - {fileID: 11400000, guid: bd5790f069fc87b48b7305f31948918e, type: 2}
