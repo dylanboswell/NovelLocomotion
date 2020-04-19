@@ -31,7 +31,14 @@ public class BallScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("XRI_Left_SecondaryButton") || Input.GetButtonDown("XRI_Right_SecondaryButton"))
+        {
+            ballPosition.position = rigPosition.position;
+        }
+        if (Input.GetButtonDown("XRI_Left_PrimaryButton") || Input.GetButtonDown("XRI_Right_PrimaryButton"))
+        {
+            rigPosition.position = ballPosition.position;
+        }
     }
 
     public void OnGrab()
@@ -58,7 +65,7 @@ public class BallScript : MonoBehaviour
             if (other == ground)
             {
                 ball.GetComponent<MeshRenderer>().material = groundColor;
-                rigPosition.position = ballPosition.position;
+                //rigPosition.position = ballPosition.position;
                 
                 inAir = false;
                 Debug.Log("moved");
@@ -67,7 +74,7 @@ public class BallScript : MonoBehaviour
             else if(other.tag == "Floor")
             {
                 ball.GetComponent<MeshRenderer>().material = groundColor;
-                rigPosition.position = ballPosition.position;
+                //rigPosition.position = ballPosition.position;
 
                 inAir = false;
                 Debug.Log("moved");
