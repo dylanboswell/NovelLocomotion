@@ -64,12 +64,13 @@ public class BallScript : MonoBehaviour
         {
             Debug.Log("grabbed");
             ball.GetComponent<MeshRenderer>().material = landed;
-            if (other == ground)
+            if (other.tag == "bad")
             {
-                ball.GetComponent<MeshRenderer>().material = groundColor;
-                
-                inAir = false;
-                Debug.Log("moved");
+                ball.GetComponent<MeshRenderer>().material = broken;
+                landGood = false;
+                Debug.Log("Bad land");
+                return;
+               
 
             }
             else if(other.tag == "Floor")
@@ -82,9 +83,11 @@ public class BallScript : MonoBehaviour
             }
             else
             {
-                ball.GetComponent<MeshRenderer>().material = broken;
-                landGood = false;
-                return;
+                ball.GetComponent<MeshRenderer>().material = groundColor;
+
+                inAir = false;
+                landGood = true;
+                Debug.Log("moved, untagged");
             }
         }
         else
