@@ -8,6 +8,7 @@ public class BallScript : MonoBehaviour
 {
     public bool isGrabbed;
     public bool inAir;
+    public bool landGood;
     public GameObject ball;
     public Transform ballPosition;
     public Rigidbody ballRigidbody;
@@ -24,7 +25,7 @@ public class BallScript : MonoBehaviour
     {
         isGrabbed = false;
         inAir = true;
-        
+        landGood = true;
        
     }
 
@@ -37,7 +38,10 @@ public class BallScript : MonoBehaviour
         }
         if (Input.GetButtonDown("XRI_Left_PrimaryButton") || Input.GetButtonDown("XRI_Right_PrimaryButton"))
         {
-            rigPosition.position = ballPosition.position;
+            if (landGood == true)
+            {
+                rigPosition.position = ballPosition.position;
+            }
         }
     }
 
@@ -45,15 +49,13 @@ public class BallScript : MonoBehaviour
     {
         isGrabbed = true;
         ball.GetComponent<MeshRenderer>().material = working;
-       // ballRigidbody.isKinematic = true;
-       // ballRigidbody.useGravity = false;
+
     }
     public void OnRelease()
     {
         isGrabbed = false;
         inAir = true;
-       // ballRigidbody.isKinematic = false;
-       // ballRigidbody.useGravity = true;
+       
     }
 
     public void OnTriggerEnter(Collider other)
@@ -65,7 +67,6 @@ public class BallScript : MonoBehaviour
             if (other == ground)
             {
                 ball.GetComponent<MeshRenderer>().material = groundColor;
-                //rigPosition.position = ballPosition.position;
                 
                 inAir = false;
                 Debug.Log("moved");
@@ -74,15 +75,15 @@ public class BallScript : MonoBehaviour
             else if(other.tag == "Floor")
             {
                 ball.GetComponent<MeshRenderer>().material = groundColor;
-                //rigPosition.position = ballPosition.position;
-
+                
+                landGood = true;
                 inAir = false;
                 Debug.Log("moved");
             }
             else
             {
                 ball.GetComponent<MeshRenderer>().material = broken;
-                //inAir = false;
+                landGood = false;
                 return;
             }
         }
